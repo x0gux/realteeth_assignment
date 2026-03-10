@@ -23,28 +23,26 @@ const INITIAL_BOOKMARKS = [
 
 export const HomeDashboardWidget = () => {
   return (
-    <div className="w-full min-h-screen bg-white relative flex flex-col items-center pt-[86px] md:pt-[90px] px-[30px] md:px-0">
+    <div className="w-full min-h-screen bg-white relative flex flex-col items-center pt-[86px] md:pt-[90px]">
       
       {/* The top search bar. */}
-      <div className="w-full flex justify-center mb-[25px] md:mb-0 md:absolute md:top-[90px]">
+      <div className="w-full px-[30px] md:px-0 flex justify-center mb-[25px] md:mb-0 md:absolute md:top-[90px]">
         <SearchBar placeholder="지역명을 입력해주세요 (ex.서울 강서구,대전 은행동)" />
       </div>
 
       {/* Main Weather Card */}
       <div className="w-full flex justify-center md:absolute md:top-[177px] mb-[26px] md:mb-0">
-        <div className="w-full md:w-[1308px] md:h-[222px]">
-          <WeatherForecastCard
-            locationName="충청남도 대전광역시"
-            currentTemp={14}
-            minTemp={3}
-            maxTemp={16}
-            hourlyForecasts={HOURLY_FORECASTS}
-          />
-        </div>
+        <WeatherForecastCard
+          locationName="충청남도 대전광역시"
+          currentTemp={14}
+          minTemp={3}
+          maxTemp={16}
+          hourlyForecasts={HOURLY_FORECASTS}
+        />
       </div>
 
       {/* Bookmark List Overlay */}
-      <div className="w-full flex justify-center md:absolute md:top-[447px]">
+      <div className="w-full px-[30px] md:px-0 flex justify-center md:absolute md:top-[447px]">
         <div className="w-full md:w-[826px]">
           <BookmarkList
             bookmarks={INITIAL_BOOKMARKS}
