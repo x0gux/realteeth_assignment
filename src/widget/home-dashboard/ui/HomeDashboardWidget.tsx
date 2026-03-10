@@ -23,21 +23,16 @@ const INITIAL_BOOKMARKS = [
 
 export const HomeDashboardWidget = () => {
   return (
-    <div className="w-full h-full min-h-screen bg-white relative">
-      {/* 
-        The top search bar. 
-        In Figma: top 90px, horizontally centered (left 42.86% base approx + some offset)
-        We'll use absolute positioning aligned with Figma, or standard flex if preferred. 
-        Using absolute to closely match Figma's exact overlay.
-      */}
-      <div className="absolute top-[90px] w-full flex justify-center">
-        <SearchBar />
+    <div className="w-full min-h-screen bg-white relative flex flex-col items-center pt-[86px] md:pt-[90px] px-[30px] md:px-0">
+      
+      {/* The top search bar. */}
+      <div className="w-full flex justify-center mb-[25px] md:mb-0 md:absolute md:top-[90px]">
+        <SearchBar placeholder="지역명을 입력해주세요 (ex.서울 강서구,대전 은행동)" />
       </div>
 
       {/* Main Weather Card */}
-      <div className="absolute top-[177px] w-full flex justify-center left-[-14px]">
-        {/* left -14px is from figma data-node-id="9:290" */}
-        <div className="w-[1308px] h-[222px]">
+      <div className="w-full flex justify-center md:absolute md:top-[177px] mb-[26px] md:mb-0">
+        <div className="w-full md:w-[1308px] md:h-[222px]">
           <WeatherForecastCard
             locationName="충청남도 대전광역시"
             currentTemp={14}
@@ -49,8 +44,8 @@ export const HomeDashboardWidget = () => {
       </div>
 
       {/* Bookmark List Overlay */}
-      <div className="absolute top-[447px] w-full flex justify-center">
-        <div className="w-[826px] h-[472px]">
+      <div className="w-full flex justify-center md:absolute md:top-[447px]">
+        <div className="w-full md:w-[826px]">
           <BookmarkList
             bookmarks={INITIAL_BOOKMARKS}
             currentCount={2}
