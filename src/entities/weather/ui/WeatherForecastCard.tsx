@@ -13,6 +13,7 @@ interface WeatherForecastCardProps {
   maxTemp: number;
   hourlyForecasts: HourlyForecast[];
   isBookmarked?: boolean;
+  onToggleBookmark?: () => void;
 }
 
 export const WeatherForecastCard = ({
@@ -21,7 +22,8 @@ export const WeatherForecastCard = ({
   minTemp,
   maxTemp,
   hourlyForecasts,
-  isBookmarked = true,
+  isBookmarked = false,
+  onToggleBookmark,
 }: WeatherForecastCardProps) => {
   return (
     <div className="relative border-y border-[#7c7c7c] border-solid flex flex-col md:block w-full overflow-hidden px-[52px] py-[24px] md:p-0 md:h-[222px]">
@@ -38,7 +40,9 @@ export const WeatherForecastCard = ({
             </p>
           </div>
           <div className="flex flex-col items-end">
-            {isBookmarked && <span className="mb-[2px]"><StarIcon /></span>}
+            <span className="mb-[2px]">
+              <StarIcon filled={isBookmarked} onClick={onToggleBookmark} />
+            </span>
             <span className="font-['Pretendard:SemiBold',sans-serif] text-[24px] leading-none mb-[4px]">
               {currentTemp}°C
             </span>
@@ -56,11 +60,9 @@ export const WeatherForecastCard = ({
         </div>
 
         {/* Desktop Star */}
-        {isBookmarked && (
-          <div className="hidden md:block absolute left-[206px] top-[29px]">
-            <StarIcon />
-          </div>
-        )}
+        <div className="hidden md:block absolute left-[206px] top-[29px]">
+          <StarIcon filled={isBookmarked} onClick={onToggleBookmark} />
+        </div>
 
         {/* Desktop Hourly Title */}
         <p className="hidden md:block absolute font-['Pretendard:Light',sans-serif] text-[13px] text-black left-0 top-[87px]">

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { StarIcon } from '../../../shared/ui/Icon';
+import { useBookmarks } from '../../../entities/bookmark/model/store';
 
 interface BookmarkCardProps {
   id: string;
@@ -17,9 +18,15 @@ export const BookmarkCard = ({
   maxTemp,
 }: BookmarkCardProps) => {
   const navigate = useNavigate();
+  const { toggleBookmark } = useBookmarks();
 
   const handleCardClick = () => {
-    navigate(`/detail/${id}`);
+    navigate(`/detail/${id}`, { state: { locationName } });
+  };
+
+  const handleStarClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent navigating to detail page
+    toggleBookmark({ id, locationName, currentTemp, minTemp, maxTemp });
   };
 
   return (
@@ -57,7 +64,7 @@ export const BookmarkCard = ({
       </div>
 
       <div className="absolute right-[16px] md:right-[9px] top-[78px] w-[20px] h-[20px]">
-        <StarIcon />
+        <StarIcon filled={true} onClick={handleStarClick} />
       </div>
     </div>
   );

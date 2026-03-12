@@ -1,6 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { Input } from '../../../shared/ui/Input';
 import { useDistricts } from '../../../entities/location/api/useDistricts';
+import { useLocationStore } from '../../../entities/location/model/store';
 import type { District } from '../../../entities/location/model/types';
 
 interface SearchBarProps {
@@ -12,6 +13,7 @@ export const SearchBar = ({ placeholder = '지역명을 입력해주세요 (ex.�
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const { data: districts } = useDistricts();
+  const { setSelectedLocation } = useLocationStore();
 
   const filteredResults = useMemo(() => {
     if (!searchTerm.trim() || !districts) return [];
@@ -37,7 +39,7 @@ export const SearchBar = ({ placeholder = '지역명을 입력해주세요 (ex.�
   const handleSelect = (address: string) => {
     setSearchTerm(address.replace(/-/g, ' '));
     setIsOpen(false);
-    // Add logic here to update the current weather based on selection
+    setSelectedLocation(address);
   };
 
   return (
