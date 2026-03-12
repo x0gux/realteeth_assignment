@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StarIcon } from '../../../shared/ui/Icon';
 import { useBookmarks } from '../../../entities/bookmark/model/store';
@@ -8,6 +9,7 @@ interface BookmarkCardProps {
   currentTemp: number;
   minTemp: number;
   maxTemp: number;
+  customName?: string;
 }
 
 export const BookmarkCard = ({
@@ -16,17 +18,46 @@ export const BookmarkCard = ({
   currentTemp,
   minTemp,
   maxTemp,
+  customName,
 }: BookmarkCardProps) => {
   const navigate = useNavigate();
-  const { toggleBookmark } = useBookmarks();
+  const { toggleBookmark, updateBookmarkName } = useBookmarks();
+  
+  const [isEditing, setIsEditing] = useState(false);
+  const [editName, setEditName] = useState(customName || locationName);
 
   const handleCardClick = () => {
-    navigate(`/detail/${id}`, { state: { locationName } });
+    if (!isEditing) {
+      navigate(`/detail/${id}`, { state: { locationName } });
+    }
   };
 
   const handleStarClick = (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent navigating to detail page
-    toggleBookmark({ id, locationName, currentTemp, minTemp, maxTemp });
+    toggleBookmark({ id, locationName, currentTemp, minTemp, maxTemp, customName });
+  };
+  
+  const handleEditClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsEditing(true);
+  };
+  
+  const saveName = () => {
+    if (editName.trim() !== '') {
+      updateBookmarkName(id, editName);
+    } else {
+      setEditName(customName || locationName);
+    }
+    setIsEditing(false);
+  };
+  
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      saveName();
+    } else if (e.key === 'Escape') {
+      setEditName(customName || locationName);
+      setIsEditing(false);
+    }
   };
 
   return (
@@ -50,12 +81,28 @@ export const BookmarkCard = ({
       <div className="absolute border-t border-[#7c7c7c] border-solid h-px w-full left-0 top-[71px]" />
 
       {/* Location Name */}
-      <p className="absolute w-full flex justify-center font-['Pretendard:Light',sans-serif] text-[#7c7c7c] text-[13px] top-[80px] left-0">
-        <span className="md:ml-0 md:mr-0 mr-[40px] pl-[10px]">{locationName}</span>
-      </p>
+      <div className="absolute w-full flex justify-center font-['Pretendard:Light',sans-serif] text-[#7c7c7c] text-[13px] top-[80px] left-0">
+        {isEditing ? (
+          <input
+            type="text"
+            className="w-full mx-[20px] bg-transparent text-center border-b border-gray-400 focus:outline-none"
+            value={editName}
+            onChange={(e) => setEditName(e.target.value)}
+            onKeyDown={handleKeyDown}
+            onBlur={saveName}
+            autoFocus
+            onClick={(e) => e.stopPropagation()}
+          />
+        ) : (
+          <span className="md:ml-0 md:mr-0 mr-[40px] pl-[10px]">{customName || locationName}</span>
+        )}
+      </div>
 
       {/* Icons */}
-      <div className="absolute right-[36px] md:right-[35px] top-[81px] w-[14px] h-[14px] cursor-pointer">
+      <div 
+        className="absolute right-[36px] md:right-[35px] top-[81px] w-[14px] h-[14px] cursor-pointer"
+        onClick={handleEditClick}
+      >
         {/* Pencil SVG placeholder */}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full text-[#7c7c7c]">
           <path d="M12 20h9"></path>

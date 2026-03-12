@@ -6,6 +6,7 @@ interface BookmarkItem {
   currentTemp: number;
   minTemp: number;
   maxTemp: number;
+  customName?: string;
 }
 
 interface BookmarkListProps {
@@ -37,6 +38,7 @@ export const BookmarkList = ({ bookmarks, currentCount, maxCount }: BookmarkList
             currentTemp={bookmark.currentTemp}
             minTemp={bookmark.minTemp}
             maxTemp={bookmark.maxTemp}
+            customName={bookmark.customName}
           />
         ))}
 

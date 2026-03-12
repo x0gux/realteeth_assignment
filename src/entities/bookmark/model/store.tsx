@@ -8,12 +8,14 @@ export interface Bookmark {
   currentTemp: number;
   minTemp: number;
   maxTemp: number;
+  customName?: string;
 }
 
 interface BookmarkContextType {
   bookmarks: Bookmark[];
   toggleBookmark: (bookmark: Bookmark) => void;
   isBookmarked: (locationName: string) => boolean;
+  updateBookmarkName: (id: string, newName: string) => void;
 }
 
 const BookmarkContext = createContext<BookmarkContextType | undefined>(undefined);
@@ -59,8 +61,14 @@ export const BookmarkProvider = ({ children }: { children: ReactNode }) => {
     return bookmarks.some((b) => b.locationName === locationName);
   };
 
+  const updateBookmarkName = (id: string, newName: string) => {
+    setBookmarks((prev) =>
+      prev.map((b) => (b.id === id ? { ...b, customName: newName } : b))
+    );
+  };
+
   return (
-    <BookmarkContext.Provider value={{ bookmarks, toggleBookmark, isBookmarked }}>
+    <BookmarkContext.Provider value={{ bookmarks, toggleBookmark, isBookmarked, updateBookmarkName }}>
       {children}
     </BookmarkContext.Provider>
   );

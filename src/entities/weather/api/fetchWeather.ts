@@ -2,7 +2,7 @@ import { convertToEnglishCity, getCityCoordinates } from '../../location/model/m
 import type { LocationState } from '../../location/model/store';
 import type { Coordinates } from '../../../shared/hooks/useGeolocation';
 
-const API_KEY = '42a9cf9872a24b2f4ac1573e564806f3';
+const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
 export interface WeatherData {

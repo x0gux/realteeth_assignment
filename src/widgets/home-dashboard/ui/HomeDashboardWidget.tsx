@@ -1,11 +1,11 @@
-import { WeatherForecastCard } from '../../../entities/weather/ui/WeatherForecastCard';
-import { SearchBar } from '../../../features/search-location/ui/SearchBar';
-import { BookmarkList } from '../../../features/bookmark/ui/BookmarkList';
-import { useLocationStore } from '../../../entities/location/model/store';
-import { useWeather } from '../../../entities/weather/api/useWeather';
-import { useBookmarks } from '../../../entities/bookmark/model/store';
-import { useGeolocation } from '../../../shared/hooks/useGeolocation';
-import type { LocationState } from '../../../entities/location/model/store';
+import { WeatherForecastCard } from '@/entities/weather/ui/WeatherForecastCard';
+import { SearchBar } from '@/features/search-location/ui/SearchBar';
+import { BookmarkList } from '@/features/bookmark/ui/BookmarkList';
+import { useLocationStore } from '@/entities/location/model/store';
+import { useWeather } from '@/entities/weather/api/useWeather';
+import { useBookmarks } from '@/entities/bookmark/model/store';
+import { useGeolocation } from '@/shared/hooks/useGeolocation';
+import type { LocationState } from '@/entities/location/model/store';
 
 export const HomeDashboardWidget = () => {
   const { selectedLocation } = useLocationStore();

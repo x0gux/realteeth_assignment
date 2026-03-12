@@ -1,4 +1,4 @@
-import { HomeDashboardWidget } from '@/widget/home-dashboard/ui/HomeDashboardWidget';
+import { HomeDashboardWidget } from '@/widgets/home-dashboard/ui/HomeDashboardWidget';
 
 const HomePage = () => {
     return (
