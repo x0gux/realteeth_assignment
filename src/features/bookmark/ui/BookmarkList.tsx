@@ -32,6 +32,7 @@ export const BookmarkList = ({ bookmarks, currentCount, maxCount }: BookmarkList
         {bookmarks.map((bookmark) => (
           <BookmarkCard
             key={bookmark.id}
+            id={bookmark.id}
             locationName={bookmark.locationName}
             currentTemp={bookmark.currentTemp}
             minTemp={bookmark.minTemp}

@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import { StarIcon } from '../../../shared/ui/Icon';
 
 interface BookmarkCardProps {
+  id: string;
   locationName: string;
   currentTemp: number;
   minTemp: number;
@@ -8,13 +10,23 @@ interface BookmarkCardProps {
 }
 
 export const BookmarkCard = ({
+  id,
   locationName,
   currentTemp,
   minTemp,
   maxTemp,
 }: BookmarkCardProps) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/detail/${id}`);
+  };
+
   return (
-    <div className="relative border border-[#7c7c7c] border-solid h-[106px] w-full md:w-[226px] overflow-hidden rounded-[8px]">
+    <div 
+      onClick={handleCardClick}
+      className="relative border border-[#7c7c7c] border-solid h-[106px] w-full md:w-[226px] overflow-hidden rounded-[8px] cursor-pointer hover:shadow-md transition-shadow"
+    >
       {/* Current Temp */}
       <div className="absolute left-[15px] md:left-[7px] top-[20px] md:top-[16px]">
         <span className="font-['Pretendard:SemiBold',sans-serif] text-[21px] leading-none text-black">
