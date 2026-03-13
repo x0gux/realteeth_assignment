@@ -10,6 +10,10 @@ export interface WeatherData {
   currentTemp: number;
   minTemp: number;
   maxTemp: number;
+  humidity: number;
+  windSpeed: number;
+  pressure: number;
+  feelsLike: number;
   hourlyForecasts: { time: string; temp: number }[];
 }
 
@@ -94,11 +98,31 @@ export const fetchWeatherData = async (location: LocationState): Promise<Weather
     };
   });
 
+  // Calculate true daily min/max from today's forecasts instead of current variance
+  const todayDate = new Date().getDate();
+  const todayForecasts = forecastData.list.filter((item: any) => {
+    return new Date(item.dt * 1000).getDate() === todayDate;
+  });
+
+  let trueMinTemp = currentData.main.temp_min;
+  let trueMaxTemp = currentData.main.temp_max;
+
+  if (todayForecasts.length > 0) {
+    const maxTemps = todayForecasts.map((item: any) => item.main.temp_max);
+    const minTemps = todayForecasts.map((item: any) => item.main.temp_min);
+    trueMaxTemp = Math.max(...maxTemps);
+    trueMinTemp = Math.min(...minTemps);
+  }
+
   return {
     locationName: finalLocationName,
     currentTemp: Math.round(currentData.main.temp),
-    minTemp: Math.round(currentData.main.temp_min),
-    maxTemp: Math.round(currentData.main.temp_max),
+    minTemp: Math.round(trueMinTemp),
+    maxTemp: Math.round(trueMaxTemp),
+    humidity: currentData.main.humidity,
+    windSpeed: currentData.wind.speed,
+    pressure: currentData.main.pressure,
+    feelsLike: Math.round(currentData.main.feels_like),
     hourlyForecasts
   };
 };

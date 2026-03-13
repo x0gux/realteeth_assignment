@@ -12,9 +12,9 @@ export const WeatherDetailHeader = ({
   maxTemp,
 }: WeatherDetailHeaderProps) => {
   return (
-    <div className="flex justify-between items-start w-full mb-[40px]">
+    <div className="flex justify-between items-start w-full mb-[24px] md:mb-[40px]">
       <div>
-        <h1 className="font-['Pretendard:SemiBold',sans-serif] text-[24px] text-black">
+        <h1 className="font-['Pretendard:SemiBold',sans-serif] text-[20px] md:text-[24px] text-black">
           {locationName}
         </h1>
         <p className="font-['Pretendard:Light',sans-serif] text-[13px] text-black mt-[16px]">
@@ -22,7 +22,7 @@ export const WeatherDetailHeader = ({
         </p>
       </div>
       <div className="flex flex-col items-end">
-        <span className="font-['Pretendard:SemiBold',sans-serif] text-[34px] leading-none mb-[8px]">
+        <span className="font-['Pretendard:SemiBold',sans-serif] text-[28px] md:text-[34px] leading-none mb-[8px]">
           {currentTemp}°C
         </span>
         <p className="font-['Pretendard:Light',sans-serif] text-[#7c7c7c] text-[13px] whitespace-nowrap">

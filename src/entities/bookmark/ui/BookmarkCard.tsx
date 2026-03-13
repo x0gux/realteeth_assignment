@@ -28,7 +28,7 @@ export const BookmarkCard = ({
 
   const handleCardClick = () => {
     if (!isEditing) {
-      navigate(`/detail/${id}`, { state: { locationName } });
+      navigate(`/detail/${id}`, { state: { locationName, customName } });
     }
   };
 
@@ -85,7 +85,7 @@ export const BookmarkCard = ({
         {isEditing ? (
           <input
             type="text"
-            className="w-full mx-[20px] bg-transparent text-center border-b border-gray-400 focus:outline-none"
+            className="w-full max-w-[calc(100%-110px)] bg-transparent text-center border-b border-gray-400 focus:outline-none"
             value={editName}
             onChange={(e) => setEditName(e.target.value)}
             onKeyDown={handleKeyDown}
@@ -94,7 +94,9 @@ export const BookmarkCard = ({
             onClick={(e) => e.stopPropagation()}
           />
         ) : (
-          <span className="md:ml-0 md:mr-0 mr-[40px] pl-[10px]">{customName || locationName}</span>
+          <span className="truncate max-w-[calc(100%-110px)] inline-block text-center">
+            {customName || locationName}
+          </span>
         )}
       </div>
 
