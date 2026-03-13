@@ -53,15 +53,13 @@ export const WeatherForecastCard = ({
         </div>
 
         {/* Desktop Location Area */}
-        <div className="hidden md:block absolute left-0 top-[24px]">
-          <h2 className="font-['Pretendard:SemiBold',sans-serif] text-[24px] text-black">
+        <div className="hidden md:flex absolute left-0 top-[24px] items-center gap-[12px] max-w-[400px]">
+          <h2 className="font-['Pretendard:SemiBold',sans-serif] text-[24px] text-black truncate">
             {locationName}
           </h2>
-        </div>
-
-        {/* Desktop Star */}
-        <div className="hidden md:block absolute left-[206px] top-[29px]">
-          <StarIcon filled={isBookmarked} onClick={onToggleBookmark} />
+          <div className="shrink-0 pt-[5px]">
+            <StarIcon filled={isBookmarked} onClick={onToggleBookmark} />
+          </div>
         </div>
 
         {/* Desktop Hourly Title */}

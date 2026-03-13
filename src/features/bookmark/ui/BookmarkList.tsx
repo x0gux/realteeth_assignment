@@ -1,4 +1,4 @@
-import { BookmarkCard } from '../../../entities/bookmark/ui/BookmarkCard';
+import { BookmarkCard } from '@/entities/bookmark/ui/BookmarkCard';
 
 interface BookmarkItem {
   id: string;
@@ -42,7 +42,15 @@ export const BookmarkList = ({ bookmarks, currentCount, maxCount }: BookmarkList
           />
         ))}
 
-        {/* Empty states or placeholders can optionally be handled here depending on functionality */}
+        {bookmarks.length === 0 && (
+          <div className="flex flex-col items-center justify-center pt-[100px] md:pt-[180px] w-full md:w-[826px] md:-ml-[31px]">
+            <p className="font-['Pretendard:Medium',sans-serif] text-[16px] text-[#7c7c7c] text-center whitespace-normal break-keep">
+              즐겨찾기한 장소가 없습니다.
+              <br/>
+              위치를 찾아 별 모양 아이콘을 눌러 추가해보세요.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

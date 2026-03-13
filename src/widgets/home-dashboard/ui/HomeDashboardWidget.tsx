@@ -58,10 +58,10 @@ export const HomeDashboardWidget = () => {
         {isLoading ? (
           <div className="md:h-[222px] flex items-center justify-center text-[#7c7c7c]">현재 위치를 확인 중이거나 날씨 정보를 불러오는 중입니다...</div>
         ) : isError || !weatherData ? (
-          <div className="md:h-[222px] flex items-center justify-center text-red-500">날씨 정보를 불러오지 못했습니다.</div>
+          <div className="md:h-[222px] flex items-center justify-center text-red-500">해당 장소의 정보가 제공되지 않습니다.</div>
         ) : (
           <WeatherForecastCard
-            locationName={displayLocationName}
+            locationName={displayLocationName.replace(/-/g, ' ')}
             currentTemp={weatherData.currentTemp}
             minTemp={weatherData.minTemp}
             maxTemp={weatherData.maxTemp}

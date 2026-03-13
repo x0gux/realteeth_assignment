@@ -22,11 +22,11 @@ const DetailPage = () => {
           {isLoading ? (
             <div className="flex h-full items-center justify-center">날씨 정보를 불러오는 중...</div>
           ) : isError || !weatherData ? (
-            <div className="flex h-full items-center justify-center text-red-500">날씨 정보를 불러오지 못했습니다.</div>
+            <div className="flex h-full items-center justify-center text-red-500">해당 장소의 정보가 제공되지 않습니다.</div>
           ) : (
             <>
               <WeatherDetailHeader
-                locationName={customName || locationName}
+                locationName={customName || locationName.replace(/-/g, ' ')}
                 currentTemp={weatherData.currentTemp}
                 minTemp={weatherData.minTemp}
                 maxTemp={weatherData.maxTemp}

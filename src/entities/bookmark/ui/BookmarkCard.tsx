@@ -23,8 +23,10 @@ export const BookmarkCard = ({
   const navigate = useNavigate();
   const { toggleBookmark, updateBookmarkName } = useBookmarks();
   
+  const displayLocationName = locationName.replace(/-/g, ' ');
+  
   const [isEditing, setIsEditing] = useState(false);
-  const [editName, setEditName] = useState(customName || locationName);
+  const [editName, setEditName] = useState(customName || displayLocationName);
 
   const handleCardClick = () => {
     if (!isEditing) {
@@ -46,7 +48,7 @@ export const BookmarkCard = ({
     if (editName.trim() !== '') {
       updateBookmarkName(id, editName);
     } else {
-      setEditName(customName || locationName);
+      setEditName(customName || displayLocationName);
     }
     setIsEditing(false);
   };
@@ -55,7 +57,7 @@ export const BookmarkCard = ({
     if (e.key === 'Enter') {
       saveName();
     } else if (e.key === 'Escape') {
-      setEditName(customName || locationName);
+      setEditName(customName || displayLocationName);
       setIsEditing(false);
     }
   };
@@ -95,7 +97,7 @@ export const BookmarkCard = ({
           />
         ) : (
           <span className="truncate max-w-[calc(100%-110px)] inline-block text-center">
-            {customName || locationName}
+            {customName || displayLocationName}
           </span>
         )}
       </div>

@@ -108,7 +108,7 @@ src/
 ├── pages/                        # 페이지 단위 컴포넌트
 │   ├── home/page.tsx             # 홈 페이지
 │   └── detail/page.tsx          # 날씨 상세 페이지
-├── widget/                       # 페이지 조합 위젯
+├── widgets/                      # 페이지 조합 위젯
 │   └── home-dashboard/
 │       └── ui/HomeDashboardWidget.tsx
 ├── features/                     # 사용자 인터랙션 단위 기능
