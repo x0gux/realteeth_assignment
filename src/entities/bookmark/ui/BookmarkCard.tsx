@@ -115,6 +115,7 @@ export const BookmarkCard = ({
       <div className="absolute right-[16px] md:right-[9px] top-[78px] w-[20px] h-[20px]">
         <StarIcon filled={true} onClick={handleStarClick} />
       </div>
+      
     </div>
   );
 };
